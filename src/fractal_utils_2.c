@@ -6,7 +6,7 @@
 /*   By: guigonza <guigonza@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:12:39 by guigonza          #+#    #+#             */
-/*   Updated: 2025/04/07 19:36:53 by guigonza         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:34:13 by guigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,54 +80,28 @@ void	draw_fractal(t_data *d, int (*t_iter_func)(double, double,
 	}
 }
 
-int lorenz_iterations(double x, double y, t_data *data)
+int	ft_is_valid_float(char *s)
 {
-    int i = 0;
+	int	i;
+	int	dots;
 
-    // Inicializamos las variables del sistema Lorenz usando el struct
-    data->lorenz_x = x;  // Inicializamos 'x'
-    data->lorenz_y = y;  // Inicializamos 'y'
-    data->lorenz_z = 0.0; // Inicializamos 'z' en 0
-
-    // Parámetros del sistema Lorenz (ya configurados en el struct)
-    double sigma = data->lorenz_sigma;
-    double rho = data->lorenz_rho;
-    double beta = data->lorenz_beta;
-
-    // Iteración hasta el número máximo de iteraciones
-    while (i < data->max_iter)
-    {
-        // Calculamos las derivadas del sistema Lorenz
-        data->lorenz_dx = sigma * (data->lorenz_y - data->lorenz_x);    // dx
-        data->lorenz_dy = data->lorenz_x * (rho - data->lorenz_z) - data->lorenz_y;  // dy
-        data->lorenz_dz = data->lorenz_x * data->lorenz_y - beta * data->lorenz_z;   // dz
-
-        // Actualizamos las variables usando el paso de tiempo
-        data->lorenz_x += data->lorenz_dx * 0.01;
-        data->lorenz_y += data->lorenz_dy * 0.02;
-        data->lorenz_z += data->lorenz_dz * 0.03;
-
-        // Guardamos los valores de 're' e 'im' para la visualización
-        data->re = data->lorenz_x / 50.0;  // Escalamos 're' para la visualización
-        data->im = data->lorenz_y / 50.0;  // Escalamos 'im' para la visualización
-
-        // Aplicamos desplazamiento y zoom
-        data->re = data->re * data->zoom + data->offset_x;
-        data->im = data->im * data->zoom + data->offset_y;
-
-        // Aseguramos que los valores estén dentro de la ventana (800x600)
-        if (data->re < 0) data->re = 0;
-        if (data->im < 0) data->im = 0;
-        if (data->re > data->width) data->re = data->width;
-        if (data->im > data->height) data->im = data->height;
-
-        // Verificamos si el sistema se escapa (condición de escape)
-        if (data->lorenz_x * data->lorenz_x + data->lorenz_y * data->lorenz_y + data->lorenz_z * data->lorenz_z > 1000)
-            break;
-
-        i++;  // Incrementamos el contador de iteraciones
-    }
-
-    return i;  // Devolvemos el número de iteraciones realizadas
+	i = 0;
+	dots = 0;
+	if (!s || !s[0])
+		return (0);
+	if (s[i] == '+' || s[i] == '-')
+		i++;
+	while (s[i])
+	{
+		if (s[i] == '.')
+		{
+			dots++;
+			if (dots > 1)
+				return (0);
+		}
+		else if (!ft_isdigit(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: guigonza <guigonza@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:12:44 by guigonza          #+#    #+#             */
-/*   Updated: 2025/04/07 19:34:09 by guigonza         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:56:22 by guigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	init_values(&data);
-	if (parse_args(ac, av, &data) != 0)
+	if (parse_args(ac, av, &data) == 1)
 		return (1);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)

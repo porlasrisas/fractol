@@ -6,7 +6,7 @@
 /*   By: guigonza <guigonza@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:12:33 by guigonza          #+#    #+#             */
-/*   Updated: 2025/04/07 16:51:53 by guigonza         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:16:18 by guigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ int	key_hook(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (keycode == 53 || keycode == 65307)
+	if (keycode == 65307)
 		close_window(data);
-	if (keycode == 123 || keycode == 65361)
+	if (keycode == 65361)
 		data->offset_x -= 0.1 / data->zoom;
-	if (keycode == 124 || keycode == 65363)
+	if (keycode == 65363)
 		data->offset_x += 0.1 / data->zoom;
-	if (keycode == 126 || keycode == 65362)
+	if (keycode == 65362)
 		data->offset_y -= 0.1 / data->zoom;
-	if (keycode == 125 || keycode == 65364)
+	if (keycode == 65364)
 		data->offset_y += 0.1 / data->zoom;
-	if (keycode == 30 || keycode == 65451)
+	if (keycode == 65451)
 		data->zoom *= 1.1;
-	if (keycode == 44 || keycode == 65453)
+	if (keycode == 65453)
 		data->zoom /= 1.1;
 	draw_fractal(data, data->t_iter_func);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
